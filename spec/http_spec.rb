@@ -37,6 +37,23 @@ module Pod
         new_options = Downloader.preprocess_options(options)
         new_options.should == options
       end
+
+      it 'passes the HTTP headers to cURL' do
+        options = { 
+          :http => "#{@fixtures_url}/lib.zip",
+          :http_headers => ['Accept: application/json', 'Authorization: Bearer'],
+        }
+        downloader = Downloader.for_target(tmp_folder, options)
+        downloader.expects(:curl!).with do |command|
+          command.include?('-H')
+          command.include?('Accept: application/json')
+          command.include?('-H')
+          command.include?('Authorization: Bearer')
+        end
+        should.raise DownloaderError do
+          downloader.download
+        end
+      end
     end
   end
 end
