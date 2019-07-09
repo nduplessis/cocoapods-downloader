@@ -6,7 +6,7 @@ module Pod
   module Downloader
     class RemoteFile < Base
       def self.options
-        [:type, :flatten, :sha1, :sha256, :headers]
+        [:type, :flatten, :sha1, :sha256, :http_headers]
       end
 
       class UnsupportedFileTypeError < StandardError; end
