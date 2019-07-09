@@ -10,10 +10,10 @@ module Pod
       def download_file(full_filename)
         parameters = ['-f', '-L', '-o', full_filename, url, '--create-dirs', '--netrc-optional', '--retry', '2']
 
-        headers.each do |h|
+        http_headers.each do |h|
           parameters << '-H'
           parameters << h
-        end unless headers.nil?
+        end unless http_headers.nil?
 
         curl! parameters
       end

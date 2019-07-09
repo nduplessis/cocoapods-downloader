@@ -35,8 +35,8 @@ module Pod
         end
       end
 
-      def headers
-        options[:headers]
+      def http_headers
+        options[:http_headers]
       end
 
       # @note   The archive is flattened if it contains only one folder and its
